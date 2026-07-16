@@ -1,0 +1,28 @@
+OpenGrok
+========
+
+This product ("OpenGrok") is a derivative work of Grok Build, the terminal AI
+coding agent published by SpaceXAI / xAI at
+https://github.com/xai-org/grok-build, and is distributed under the Apache
+License, Version 2.0 (see the LICENSE file).
+
+Original work: Copyright 2023-2026 SpaceXAI.
+
+Modifications in this fork (by the OpenGrok maintainers, KRPCT):
+
+  - Rebranded the user-facing product name from "Grok Build" to "OpenGrok" in
+    the welcome/startup screen, the version and update banners, the CLI
+    `--help`/about text, and related display strings. The invoked command
+    (`grok`), crate names, environment variables, on-disk config directory
+    (`~/.grok`), and authentication endpoints are unchanged from upstream.
+
+This project is an INDEPENDENT fork. It is NOT affiliated with, sponsored by, or
+endorsed by SpaceXAI or xAI. "Grok" is a trademark of its respective owner; the
+Apache License, Version 2.0 does not grant permission to use such trademarks
+(see Section 6 of the LICENSE).
+
+Third-party and vendored components retain their own copyright and license
+notices. See:
+  - THIRD-PARTY-NOTICES
+  - third_party/NOTICE
+  - crates/codegen/xai-grok-tools/THIRD_PARTY_NOTICES.md

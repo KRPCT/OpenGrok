@@ -2,10 +2,11 @@
 
 <h1>OpenGrok (<code>grok</code>)</h1>
 
-**OpenGrok** is a terminal-based AI coding agent. It runs as a full-screen TUI
-that understands your codebase, edits files, executes shell commands, searches
-the web, and manages long-running tasks — interactively, headlessly for
-scripting/CI, or embedded in editors via the Agent Client Protocol (ACP).
+**English** · [简体中文](README.zh-CN.md)
+
+A terminal-based AI coding agent — a full-screen TUI that understands your
+codebase, edits files, runs shell commands, searches the web, and manages
+long-running tasks.
 
 </div>
 
@@ -17,6 +18,15 @@ scripting/CI, or embedded in editors via the Agent Client Protocol (ACP).
 > endorsed by** SpaceXAI or xAI. "Grok" is a trademark of its respective owner;
 > the Apache License does not grant rights to that mark. See [`NOTICE`](NOTICE)
 > for attribution and the list of modifications made in this fork.
+
+## Highlights
+
+- Full-screen terminal UI with scrollback, prompt, and modals.
+- Reads and edits your codebase; runs shell commands, search, and web fetch.
+- Runs interactively, headlessly (`grok -p "…"` for scripting/CI), or embedded
+  in editors via the Agent Client Protocol (ACP).
+- Pluggable model backends, including custom / third-party OpenAI-compatible
+  endpoints configured in `~/.grok/config.toml`.
 
 ## Building from source
 
@@ -30,7 +40,7 @@ Requirements:
 - macOS and Linux are supported build hosts; Windows builds are best-effort.
 
 ```sh
-cargo run -p xai-grok-pager-bin              # build + launch the TUI
+cargo run   -p xai-grok-pager-bin            # build + launch the TUI
 cargo build -p xai-grok-pager-bin --release  # release binary: target/release/xai-grok-pager
 cargo check -p xai-grok-pager-bin            # fast validation
 ```
@@ -62,7 +72,7 @@ OpenAI-compatible model endpoints can be configured in `~/.grok/config.toml`
 
 ```sh
 cargo check -p <crate>        # always target specific crates; full-workspace builds are slow
-cargo test -p xai-grok-config # per-crate tests
+cargo test  -p xai-grok-config # per-crate tests
 cargo clippy -p <crate>       # lint config: clippy.toml at the repo root
 cargo fmt --all               # rustfmt.toml at the repo root
 ```
@@ -76,7 +86,7 @@ Third-party and vendored code remains under its original licenses. See:
 
 - [`THIRD-PARTY-NOTICES`](THIRD-PARTY-NOTICES) — crates.io / git dependencies,
   bundled UI themes, and in-tree source ports (including openai/codex and
-  sst/opencode tool implementations)
+  sst/opencode tool implementations).
 - [`crates/codegen/xai-grok-tools/THIRD_PARTY_NOTICES.md`](crates/codegen/xai-grok-tools/THIRD_PARTY_NOTICES.md)
-  — crate-local notice for the codex and opencode ports
-- [`third_party/NOTICE`](third_party/NOTICE) — vendored Mermaid-stack index
+  — crate-local notice for the codex and opencode ports.
+- [`third_party/NOTICE`](third_party/NOTICE) — vendored Mermaid-stack index.

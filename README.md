@@ -50,6 +50,34 @@ On first launch it opens your browser to authenticate. Custom / third-party
 OpenAI-compatible model endpoints can be configured in `~/.grok/config.toml`
 (see the user guide under `crates/codegen/xai-grok-pager/docs/user-guide/`).
 
+## Configuring a model endpoint
+
+By default `grok` signs in to your account on first launch. To route to any
+**OpenAI-compatible** endpoint instead — a self-hosted model, a corporate
+gateway, or a third-party relay — add a model block to `~/.grok/config.toml`.
+Replace the placeholders below with your provider's values:
+
+```toml
+[model."my-model"]
+model          = "MODEL_ID"                              # model name sent to the provider
+base_url       = "https://YOUR_PROVIDER.example.com/v1"  # OpenAI-compatible base URL (placeholder)
+name           = "My Model"                              # label shown in the model picker
+env_key        = "MY_API_KEY"                            # env var holding the key — keeps secrets out of the file
+api_backend    = "chat_completions"                      # "chat_completions" (default), "responses", or "messages"
+context_window = 200000                                  # context size in tokens; drives auto-compaction
+```
+
+Keep the API key in an environment variable rather than in the file, then run:
+
+```sh
+export MY_API_KEY="YOUR_API_KEY_HERE"   # Windows PowerShell: setx MY_API_KEY "YOUR_API_KEY_HERE"
+grok -m my-model                        # or switch inside the TUI with: /model my-model
+```
+
+The `[model."…"]` key is the local id you pass to `-m` / `/model`; `model` is
+the slug sent to the provider. For the full list of fields, see
+[`docs/user-guide/11-custom-models.md`](crates/codegen/xai-grok-pager/docs/user-guide/11-custom-models.md).
+
 ## Repository layout
 
 | Path | Contents |

@@ -47,6 +47,33 @@ cargo check -p xai-grok-pager-bin            # 快速校验
 认证。自定义 / 第三方 OpenAI 兼容端点可在 `~/.grok/config.toml` 中配置(参见
 `crates/codegen/xai-grok-pager/docs/user-guide/` 下的用户指南)。
 
+## 配置模型端点
+
+默认情况下,`grok` 首次启动会登录你的账户。若要改为接入任意 **OpenAI 兼容**
+端点 —— 自建模型、企业网关或第三方中转 —— 在 `~/.grok/config.toml` 中加一个
+模型块即可。把下面的占位符替换成你自己 provider 的值:
+
+```toml
+[model."my-model"]
+model          = "MODEL_ID"                              # 发给 provider 的模型名
+base_url       = "https://YOUR_PROVIDER.example.com/v1"  # OpenAI 兼容的 base URL(占位符)
+name           = "My Model"                              # 模型选择器里显示的名称
+env_key        = "MY_API_KEY"                            # 存放 key 的环境变量名 —— 让密钥不落盘
+api_backend    = "chat_completions"                      # "chat_completions"(默认)、"responses" 或 "messages"
+context_window = 200000                                  # 上下文 token 数;决定自动压缩触发点
+```
+
+把 API key 放进环境变量而非写入文件,然后运行:
+
+```sh
+export MY_API_KEY="YOUR_API_KEY_HERE"   # Windows PowerShell:setx MY_API_KEY "YOUR_API_KEY_HERE"
+grok -m my-model                        # 或在 TUI 内切换:/model my-model
+```
+
+`[model."…"]` 的 key 是你传给 `-m` / `/model` 的本地 id;`model` 字段才是发给
+provider 的 slug。完整字段说明见
+[`docs/user-guide/11-custom-models.md`](crates/codegen/xai-grok-pager/docs/user-guide/11-custom-models.md)。
+
 ## 仓库结构
 
 | 路径 | 内容 |

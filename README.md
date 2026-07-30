@@ -17,7 +17,9 @@ long-running tasks.
 > under the Apache License 2.0. It is **not affiliated with, sponsored by, or
 > endorsed by** SpaceXAI or xAI. "Grok" is a trademark of its respective owner;
 > the Apache License does not grant rights to that mark. See [`NOTICE`](NOTICE)
-> for attribution and the list of modifications made in this fork.
+> for attribution and the list of modifications made in this fork. The
+> [`SOURCE_REV`](SOURCE_REV) file records the upstream monorepo commit this
+> tree is synced from.
 
 ## Highlights
 
@@ -34,10 +36,20 @@ Requirements:
 
 - **Rust** — the toolchain is pinned by [`rust-toolchain.toml`](rust-toolchain.toml);
   `rustup` installs it automatically on first build.
-- **protoc** — proto codegen resolves [`bin/protoc`](bin/protoc) (a
-  [dotslash](https://dotslash-cli.com) launcher) or falls back to a `protoc` on
-  `PATH` / `$PROTOC`.
-- macOS and Linux are supported build hosts; Windows builds are best-effort.
+- **[DotSlash](https://dotslash-cli.com)** — required so hermetic tools under
+  [`bin/`](bin/) (notably [`bin/protoc`](bin/protoc)) can download and run.
+  Install it and ensure `dotslash` is on your `PATH` **before** building:
+
+  ```sh
+  cargo install dotslash
+  # or: prebuilt packages — https://dotslash-cli.com/docs/installation/
+  /usr/bin/env dotslash --help   # sanity check
+  ```
+
+- **protoc** — proto codegen resolves [`bin/protoc`](bin/protoc) via DotSlash,
+  or falls back to a `protoc` on `PATH` / `$PROTOC`.
+- macOS and Linux are supported build hosts; Windows builds are best-effort
+  and not currently tested from this tree.
 
 ```sh
 cargo run   -p xai-grok-pager-bin            # build + launch the TUI

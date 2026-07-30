@@ -16,6 +16,7 @@
 > 依据 Apache License 2.0 分发。本项目**与 SpaceXAI / xAI 无隶属关系,亦未获其
 > 赞助或背书**。"Grok" 为其各自所有者的商标,Apache License 不授予该商标的使用
 > 权。归属信息与本分叉的改动清单见 [`NOTICE`](NOTICE)。
+> [`SOURCE_REV`](SOURCE_REV) 文件记录了本源码树同步自上游 monorepo 的提交。
 
 ## 特性
 
@@ -32,10 +33,19 @@
 
 - **Rust** —— 工具链由 [`rust-toolchain.toml`](rust-toolchain.toml) 锁定;
   首次构建时 `rustup` 会自动安装。
-- **protoc** —— proto 代码生成会解析 [`bin/protoc`](bin/protoc)(一个
-  [dotslash](https://dotslash-cli.com) 启动器),或回退到 `PATH` / `$PROTOC`
-  上的 `protoc`。
-- 支持在 macOS 与 Linux 上构建;Windows 构建为尽力而为。
+- **[DotSlash](https://dotslash-cli.com)** —— 必需;[`bin/`](bin/) 下的内嵌
+  工具(尤其是 [`bin/protoc`](bin/protoc))需要通过它下载并运行。构建**之前**
+  请先安装,并确保 `dotslash` 在 `PATH` 上:
+
+  ```sh
+  cargo install dotslash
+  # 或:预编译包 —— https://dotslash-cli.com/docs/installation/
+  /usr/bin/env dotslash --help   # 自检
+  ```
+
+- **protoc** —— proto 代码生成经 DotSlash 解析 [`bin/protoc`](bin/protoc),
+  或回退到 `PATH` / `$PROTOC` 上的 `protoc`。
+- 支持在 macOS 与 Linux 上构建;Windows 构建为尽力而为,且目前未从本源码树测试。
 
 ```sh
 cargo run   -p xai-grok-pager-bin            # 构建并启动 TUI
